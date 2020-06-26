@@ -15,8 +15,8 @@ import com.dealership.global.Transaction;
 
 public class Dealer {
 	
-	public static final String path = "c:/users/pjk14/desktop/tempDealer/";
-	//public static final String path_dealer = "Java/Week2/Web/car_dealership1.0/Data/Dealer/";
+	//public static final String path = "c:/users/pjk14/desktop/tempDealer/";
+	public static final String path = "Java/Week2/Web/car_dealership1.0/Data/Dealer/";
 	private static final String d = ";";
 	private static final String l = ":";
 	private String firstName;
@@ -216,10 +216,12 @@ public class Dealer {
 	}
 	
 	public void addTransaction(String vin) {
+		this.transactionHistory = Database.checkNull(this.transactionHistory);
 		this.transactionHistory.add(vin);
 	}
 	
 	public void addInventory(String vin) {
+		this.inventory = Database.checkNull(this.inventory);
 		this.inventory.add(vin);
 	}
 	

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dealership.auto.Automobile;
+import com.dealership.data.Database;
 import com.dealership.dealer.Dealer;
 
 /**
@@ -46,22 +47,15 @@ public class SaveAutoServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		Automobile automobile = (Automobile)session.getAttribute("newAutomobile");
-		
 		Dealer dealer = (Dealer)session.getAttribute("user");
 		
 		String photoString = request.getParameter("photoUrl");
-		
 		String photoList[] = photoString.split(",");
+		automobile.setPictures(Database.toArrayList(photoList));
 		
-		automobile.setPictures(Automobile.toArrayList(photoList));
+		dealer.addInventory(automobile.getVin());
 		
-		ArrayList<String> inventory = dealer.getInventory();
-		inventory.add(automobile.getVin());
-		
-		dealer.setInventory(inventory);
-		
-		
-		dealer.update(dealer);
+		Dealer.update(dealer);
 		automobile.save();
 		
 		session.setAttribute("user", dealer);

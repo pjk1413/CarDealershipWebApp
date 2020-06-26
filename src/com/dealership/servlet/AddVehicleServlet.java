@@ -69,10 +69,6 @@ public class AddVehicleServlet extends HttpServlet {
 		automobile.setEngine(request.getParameter("engine"));
 		automobile.setBodyType(request.getParameter("bodyType"));
 		automobile.setNewVehicle(Boolean.valueOf("newCar"));
-		System.out.println(automobile.getDescription());
-		automobile.setPurchaseDate(null);
-		
-		System.out.println(request.getParameter("automatic"));
 		
 		if (Constant.isNull(request.getParameter("manual")).contentEquals("manual")) {
 			automobile.setTransmission("Manual");

@@ -32,8 +32,8 @@ public class SignUpUserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-HttpSession session = request.getSession();
+		// Should be a doPost
+		HttpSession session = request.getSession();
 		
 		String firstName = request.getParameter("firstName");
 		String lastName = request.getParameter("lastName");
@@ -57,7 +57,7 @@ HttpSession session = request.getSession();
 		session.setAttribute("user", user);
 		session.setAttribute("current_user", "user");
 		
-		RequestDispatcher rs = request.getRequestDispatcher("/user/user_home.jsp");
+		RequestDispatcher rs = request.getRequestDispatcher("user_home.jsp");
 		rs.forward(request, response);
 	}
 

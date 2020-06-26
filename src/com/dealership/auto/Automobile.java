@@ -21,8 +21,8 @@ import java.util.TreeMap;
 
 public class Automobile extends Database {
 	
-	//private static final String path = "Java/Week2/Web/car_dealership1.0/Data/Automobile/";
-	private static final String path = "c:/users/pjk14/desktop/tempAuto/";
+	private static final String path = "Java/Week2/Web/car_dealership1.0/Data/Automobile/";
+	//private static final String path = "c:/users/pjk14/desktop/tempAuto/";
 	private static final String d = ";";
 	private static final String l = "#";
 	private String make;
@@ -68,6 +68,7 @@ public class Automobile extends Database {
 		this.vin = vin;
 		this.purchaseDate = "NA";
 		this.newVehicle = false;
+		this.pictures = new ArrayList<String>();
 	}
 	
 	

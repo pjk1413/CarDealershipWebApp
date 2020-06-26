@@ -14,6 +14,8 @@ import com.dealership.user.User;
 
 public class Transaction {
 	
+	//public static final String path = "c:/users/pjk14/desktop/tempTrans/";
+	public static final String path = "../Data/Transaction";
 	private static final String d = ";";
 	private String userEmail;
 	private String dealerEmail;
@@ -22,9 +24,11 @@ public class Transaction {
 	
 	public Transaction() {}
 	
-	public Transaction(String userEmail, String automobileVin) {
+	public Transaction(String userEmail, String dealerEmail, String automobileVin, double price) {
 		this.userEmail = userEmail;
+		this.dealerEmail = dealerEmail;
 		this.automobileVin = automobileVin;
+		this.price = price;
 	}
 	
 	
@@ -34,10 +38,9 @@ public class Transaction {
 	public void save() {
 		
 		String fileContent = this.userEmail + d + this.dealerEmail + d + this.price + d + this.automobileVin;
-		System.out.println("SAVE");
 		
 		try {
-			File file = new File(Database.path_transaction +this.automobileVin + ".txt");
+			File file = new File(path +this.automobileVin + ".txt");
 			
 			if (!file.exists()) {
 				file.createNewFile();
@@ -61,7 +64,7 @@ public class Transaction {
 	 */
 	public static Transaction load(String autoVin) {
 		//Create a directory List
-		File directory = new File(Database.path_transaction);
+		File directory = new File(path);
 		String[] files = directory.list();
 				
 			Transaction transaction = new Transaction();
@@ -69,25 +72,22 @@ public class Transaction {
 			try {
 				for (String file : files) {
 					if (file.contains(autoVin)) {
-						File f = new File(file);
+						File f = new File(path + file);
 							
 						Scanner scanner = new Scanner(f);
 							
 						String stringToParse = "";
 							
 						while (scanner.hasNext()) {
-							stringToParse += scanner.next();
-								
+							stringToParse += scanner.next();	
 						}
 							
-						transaction = transaction.parse(stringToParse); //This could also be a constructor that parses
-							
+						transaction = transaction.parse(stringToParse); //This could also be a constructor that parses	
 					}
 				}
 			} catch (Exception e) {
 				e.getMessage();
 			}
-			
 				
 		return transaction;
 	}
@@ -97,12 +97,12 @@ public class Transaction {
 	 * Deletes a dealer object from the database when given a string id of a dealer object
 	 */
 	public static void delete(String autoVin) {
-		File directory = new File(Database.path_transaction);
+		File directory = new File(path);
 		String[] files = directory.list();
 		
 		for (String file : files) {
 			if (file.contains(autoVin)) {
-				File deleteFile = new File(file);
+				File deleteFile = new File(path + file);
 				deleteFile.delete();
 			}
 		}
@@ -114,14 +114,14 @@ public class Transaction {
 	 * Updates a dealer object in the database
 	 */
 
-	public static void update(Transaction transaction) {
+	public static void update(Transaction newTransaction) {
 		// TODO Auto-generated method stub
 		ArrayList<Transaction> transactionList = loadAll();
 		
-		for (Transaction t : transactionList) {
-			if (transaction.automobileVin.contentEquals(t.getAutomobileVin())) {
-				delete(t.getAutomobileVin());
-				transaction.save();
+		for (Transaction transaction : transactionList) {
+			if (transaction.automobileVin.contentEquals(newTransaction.getAutomobileVin())) {
+				delete(transaction.getAutomobileVin());
+				newTransaction.save();
 			}
 		}
 	}
@@ -134,7 +134,7 @@ public class Transaction {
 	public static ArrayList<Transaction> loadAll() {
 		ArrayList<Transaction> transactionList = new ArrayList<Transaction>();
 		
-		File directory = new File(Database.path_transaction);
+		File directory = new File(path);
 		String[] files = directory.list();
 		
 		if (null == files || files.length < 1) {
@@ -144,7 +144,7 @@ public class Transaction {
 		try {
 			for (String file : files) {
 				
-				File f = new File(Database.path_transaction + file);
+				File f = new File(path + file);
 				Scanner scanner = new Scanner(f);
 				
 				String parsableString = "";
@@ -154,7 +154,6 @@ public class Transaction {
 					parsableString += scanner.next();
 				}
 				
-				
 				Transaction transaction = parse(parsableString);
 				transactionList.add(transaction);
 			}
@@ -162,7 +161,6 @@ public class Transaction {
 			// TODO: handle exception
 			e.getMessage();
 		}
-		
 		
 		return transactionList;
 	}
@@ -183,11 +181,9 @@ public class Transaction {
 		
 		return transaction;
 	}
-	
-	
-	
+
 	/*
-	 * Gettes and Setters
+	 * ------------------------------- Getters and Setters ----------------------------------
 	 */
 	
 

@@ -1,0 +1,1 @@
+BMW;X5;NA;2007;6950.0;136;This is a well cared for BMW.;VGHTY1234HJYU654321;Automatic;SUV;Gasoline;false#https://images.craigslist.org/00F0F_iAcYiwbYBNN_600x450.jpg;https://images.craigslist.org/00H0H_4cK01YOiAkC_600x450.jpg; https://images.craigslist.org/00U0U_dyQMVTVCYf3_600x450.jpg; https://images.craigslist.org/00w0w_6BLUqaYSRLR_600x450.jpg;

@@ -43,7 +43,7 @@
       <div class="row">
           <div class="col-sm-1"></div>
         <div class="col">
-            <form class="mx-auto" action="../SignUpUserServlet" method="post">
+            <form class="mx-auto" action="SignUpUserServlet" method="post">
                 <hr class="my-4">
                 <h5>Account Information</h5>
                 <div class="form-row">

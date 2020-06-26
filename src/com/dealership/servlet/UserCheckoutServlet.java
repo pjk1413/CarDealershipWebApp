@@ -1,4 +1,4 @@
-package com.dealership.global;
+package com.dealership.servlet;
 
 import java.io.IOException;
 import java.time.LocalDate;
@@ -16,6 +16,7 @@ import javax.servlet.http.HttpSession;
 
 import com.dealership.auto.Automobile;
 import com.dealership.dealer.Dealer;
+import com.dealership.global.Transaction;
 import com.dealership.user.User;
 
 /**
@@ -73,7 +74,7 @@ public class UserCheckoutServlet extends HttpServlet {
 					
 					ArrayList<Automobile> autoList = Automobile.loadAll();
 					
-					automobile.setPurchaseDate(LocalDate.now().toString());
+					automobile.sellAutomobile(LocalDate.now().toString());
 					
 					for (Automobile auto : autoList) {
 						if (vin.contentEquals(auto.getVin())) {
@@ -91,10 +92,9 @@ public class UserCheckoutServlet extends HttpServlet {
 					
 					tempHistory.add(transaction.getAutomobileVin());
 					tempTransaction.add(transaction.getAutomobileVin());
-			
 
 					Dealer.update(dealer);
-					User.update(user.getEmail());
+					User.update(user);
 					
 					session.setAttribute("r", transaction);
 					

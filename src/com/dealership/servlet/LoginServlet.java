@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.dealership.admin.Admin;
 import com.dealership.dealer.Dealer;
 import com.dealership.user.User;
 
@@ -55,6 +56,10 @@ public class LoginServlet extends HttpServlet {
 		
 		int current_user = 0;
 		
+		if (Admin.email.contentEquals(email) && Admin.password.contentEquals(password)) {
+			session.setAttribute("current_user", "admin");
+			current_user = 3;
+		}
 		
 		if (!(dealerList == null || dealerList.size() == 0)) {
 			//System.out.println("IN");

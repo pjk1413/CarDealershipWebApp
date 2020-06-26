@@ -17,12 +17,6 @@ import com.dealership.user.User;
 public abstract class Database {
 	
 	
-	
-	
-	public static final String path_admin = "../Data/Admin";
-	public static final String path_transaction = "../Data/Transaction";
-	
-
 	public static ArrayList<String> checkNull(ArrayList<String> list) {
 		
 		if (list == null) {		
@@ -31,6 +25,14 @@ public abstract class Database {
 			return list;
 		}
 		
+	}
+	
+	public static String isNull(String str) {
+		if (str.contentEquals("null")) {
+			return null;
+		} else {
+			return str;
+		}
 	}
 	
 	

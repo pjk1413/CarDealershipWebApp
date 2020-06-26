@@ -21,8 +21,8 @@ import com.dealership.global.Transaction;
 //Represents a person searching for a car
 public class User {
 	
-	//private static final String path = "Java/Week2/Web/car_dealership1.0/Data/User/";
-	private static final String path = "c:/users/pjk14/desktop/tempUser/";
+	private static final String path = "Java/Week2/Web/car_dealership1.0/Data/User/";
+	//private static final String path = "c:/users/pjk14/desktop/tempUser/";
 	private static final String d = ";";
 	private static final String l = ":";
 	private String firstName;
@@ -238,7 +238,7 @@ public class User {
 		user.lastName = s[1];
 		user.email = s[2];
 		user.password = s[3];
-		user.cart = s[4];
+		user.cart = Database.isNull(s[4]);
 		user.address = Address.parseAddress(a);
 		
 		user.favoriteList = Database.toArrayList(Database.checkNull(f));
@@ -247,6 +247,21 @@ public class User {
 		return user;
 	}
 	
+	public void addFavorite(String favorite) {
+		this.favoriteList.add(favorite);
+	}
+	
+	public void removeFavorite(String favorite) {
+		this.favoriteList.remove(favorite);
+	}
+	
+	public void addPurchase(String purchase) {
+		this.purchaseHistory.add(purchase);
+	}
+	
+	public void removePurchase(String purchase) {
+		this.purchaseHistory.remove(purchase);
+	}
 	
 	
 	/*
